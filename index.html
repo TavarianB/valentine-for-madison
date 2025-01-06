@@ -132,7 +132,7 @@
     let noScale = 1;
     const maxYesScale = 2;  // Maximum size for the "Yes" button
     const scaleIncrement = 0.20;  // 5% growth each click
-    //const maxNoClicks = ;  // Stop growing "Yes" after 21 "No" button clicks
+    const maxNoClicks = 100;  // Stop growing "Yes" after 21 "No" button clicks
 
     noButton.addEventListener("click", () => {
       if (noClickCount < noResponses.length) {
