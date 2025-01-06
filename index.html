@@ -1,0 +1,131 @@
+!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Be My Valentine, Madison</title>
+  <style>
+    body {
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      text-align: center;
+      background-color: #ffe6e6;
+      color: #ff3366;
+      padding: 20px;
+    }
+
+    h1 {
+      font-size: 3rem;
+      color: #ff0033;
+      margin-top: 20px;
+    }
+
+    #buttons {
+      margin-top: 50px;
+    }
+
+    button {
+      font-size: 1.5rem;
+      padding: 10px 20px;
+      margin: 10px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: transform 0.3s ease, background-color 0.3s ease;
+    }
+
+    button#yes {
+      background-color: #ff66a3;
+      color: white;
+    }
+
+    button#no {
+      background-color: #f2f2f2;
+      color: #ff3366;
+    }
+
+    button:hover {
+      transform: scale(1.1);
+    }
+
+    #message {
+      font-size: 1.2rem;
+      margin-top: 20px;
+      color: #800040;
+    }
+
+    footer {
+      margin-top: 50px;
+      font-size: 1rem;
+      color: #800040;
+    }
+
+    footer a {
+      color: #ff3366;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <h1>Will You Be My Valentine, Madison? ❤️</h1>
+  <div id="buttons">
+    <button id="yes">Yes</button>
+    <button id="no">No</button>
+  </div>
+  <p id="message"></p>
+
+  <footer>
+    Made with ❤️ by someone who adores you (& Mike 🐢).
+  </footer>
+
+  <script>
+    const yesButton = document.getElementById("yes");
+    const noButton = document.getElementById("no");
+    const message = document.getElementById("message");
+
+    // Personalized "No" responses
+    const noResponses = [
+      "Are you sure, Madison? My heart can’t handle a no. 🥺❤️",
+      "But Madison, I really, really like you! 🥰",
+      "Come on, give me a chance, please? Mike thinks we’re perfect together! 🐢💕",
+      "I picked out chocolates and everything for you, Madison! 🍫❤️",
+      "But… Madison, I think I’m in love with you. 🥺❤️",
+      "Pretty please? Mike said he’ll be sad if you say no. 🐢💔",
+      "You’re my favorite person in the world, Madison. 🌍❤️",
+      "Saying yes would make me the happiest person ever! 😍",
+      "You wouldn’t want to break my heart, Madison, would you? 💔😭",
+      "You’re my dream Valentine, Madison. Don’t say no! 🌹💖",
+      "Madison, Mike agrees—he’s rooting for us! 🐢❤️",
+      "What if I promised to share my snacks with you and Mike forever? 🍿🐢💕",
+      "I made this whole website just for you, Madison. 😊❤️",
+      "You’re the only person I want as my Valentine, Madison. 💕",
+      "Mike says he can’t believe you’re hesitating! 🐢😄",
+      "Madison, you’re the peanut butter to my jelly! 🥜🍓",
+      "Please don’t leave me hanging… my heart’s on the line, Madison! 🎣❤️",
+      "You’re the missing piece of my puzzle, Madison. 🧩❤️",
+      "No? But I’ve already written our love story in my head, Madison. 📖❤️",
+      "You’re my sunshine on a cloudy day, Madison. 🌞☁️ Don’t say no!"
+    ];
+
+    let noClickCount = 0;
+
+    noButton.addEventListener("click", () => {
+      if (noClickCount < noResponses.length) {
+        message.textContent = noResponses[noClickCount];
+        noClickCount++;
+      } else {
+        message.textContent = "Okay, I get it... 😭 But Mike and I still think you're amazing! 🐢❤️";
+      }
+    });
+
+    yesButton.addEventListener("click", () => {
+      yesButton.style.transform = `scale(${1.2 + noClickCount * 0.2})`;
+      message.textContent = "Yay! You made my day, Madison! 🎉❤️ Mike is doing a happy dance! 🐢💃";
+    });
+  </script>
+</body>
+</html>
