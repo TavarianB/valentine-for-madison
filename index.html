@@ -21,24 +21,30 @@
     }
 
     h1 {
-      font-size: 2rem; /* Adjusted for smaller screens */
+      font-size: 3rem;
       color: #ff0033;
       margin-top: 20px;
-      padding: 0 10px; /* Prevent text overflow */
+    }
+
+    #poem {
+      font-size: 1.2rem;
+      color: #cc0066;
+      margin-top: 20px;
+      font-style: italic;
     }
 
     #buttons {
-      margin-top: 30px; /* Reduced spacing for mobile */
+      margin-top: 50px;
       display: flex;
       justify-content: center;
-      gap: 10px; /* Reduced gap for smaller screens */
+      gap: 20px;
       flex-wrap: wrap;
       transition: margin-top 0.3s ease;
     }
 
     button {
-      font-size: 1.2rem; /* Smaller text size */
-      padding: 10px 15px; /* Adjusted for smaller screens */
+      font-size: 1.5rem;
+      padding: 10px 20px;
       margin: 10px;
       border: none;
       border-radius: 10px;
@@ -62,18 +68,17 @@
     }
 
     #message {
-      font-size: 1rem; /* Reduced size for better readability */
-      margin-top: 15px; /* Adjusted spacing */
+      font-size: 1.2rem;
+      margin-top: 20px;
       color: #800040;
       width: 100%;
       text-align: center;
-      padding: 0 10px; /* Prevent text overflow */
       transition: margin-top 0.3s ease;
     }
 
     footer {
-      margin-top: 20px; /* Reduced spacing for mobile */
-      font-size: 0.9rem; /* Smaller footer text */
+      margin-top: 50px;
+      font-size: 1rem;
       color: #800040;
     }
 
@@ -87,65 +92,105 @@
       text-decoration: underline;
     }
 
-    @media (max-width: 768px) {
-      h1 {
-        font-size: 1.8rem;
+    /* Falling Hearts Animation */
+    @keyframes fall {
+      0% {
+        transform: translateY(-100px) rotate(0deg);
+        opacity: 1;
       }
-
-      button {
-        font-size: 1rem;
-        padding: 8px 12px;
-      }
-
-      #buttons {
-        gap: 8px;
-        margin-top: 20px;
-      }
-
-      footer {
-        font-size: 0.8rem;
+      100% {
+        transform: translateY(100vh) rotate(360deg);
+        opacity: 0;
       }
     }
 
-    @media (max-width: 480px) {
-      h1 {
-        font-size: 1.5rem;
-      }
+    .heart {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background-color: #ff3366;
+      clip-path: polygon(50% 0%, 100% 37%, 82% 100%, 50% 82%, 18% 100%, 0% 37%);
+      animation: fall 5s linear infinite;
+    }
 
-      button {
-        font-size: 0.9rem;
-        padding: 6px 10px;
-      }
+    .heart:nth-child(1) {
+      left: 20%;
+      animation-duration: 4s;
+      animation-delay: 0s;
+    }
 
-      #buttons {
-        gap: 6px;
-        margin-top: 15px;
-      }
+    .heart:nth-child(2) {
+      left: 50%;
+      animation-duration: 5s;
+      animation-delay: 1s;
+    }
 
-      footer {
-        font-size: 0.7rem;
-      }
+    .heart:nth-child(3) {
+      left: 80%;
+      animation-duration: 3s;
+      animation-delay: 2s;
+    }
+
+    /* Countdown Timer */
+    #countdown {
+      font-size: 1rem;
+      color: #800040;
+      margin-top: 20px;
+      font-weight: bold;
+    }
+
+    /* Mike the Turtle */
+    #photo {
+      margin-top: 30px;
+    }
+
+    #photo img {
+      width: 150px;
     }
   </style>
 </head>
 <body>
-  <h1>Will You Be My Valentine, Madison? ❤️</h1>
+  <div class="heart"></div>
+  <div class="heart"></div>
+  <div class="heart"></div>
+
+  <h1>1 Will You Be My Valentine, Madison? ❤️</h1>
+  <p id="poem">
+    Roses are red, violets are blue,<br>
+    No one shines brighter than you! 🌹💖<br>
+    With Mike’s little heart and mine too,<br>
+    I hope you’ll say yes and make my dream come true! ❤️
+  </p>
   <div id="buttons">
     <button id="yes">Yes</button>
     <button id="no">No</button>
   </div>
   <p id="message"></p>
 
+  <p id="countdown"></p>
+
+  <div id="photo">
+    <img src="turtle-mike.png" alt="Mike the Turtle">
+    <p>Mike can't wait for us to be Valentines! 🐢❤️</p>
+  </div>
+
   <footer>
     Made with Love by Tavarian who adores you (& Mike).
   </footer>
+
+  <audio id="loveSong" autoplay loop>
+    <source src="your-song.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
 
   <script>
     const yesButton = document.getElementById("yes");
     const noButton = document.getElementById("no");
     const message = document.getElementById("message");
     const buttonsContainer = document.getElementById("buttons");
+    const countdownElement = document.getElementById("countdown");
 
+    // Personalized "No" responses
     const noResponses = [
       "Are you sure, Madison? My heart can’t handle a no. 🥺❤️",
       "But Madison, I really, really Love you! 🥰",
@@ -154,8 +199,8 @@
       "But. . . Madison, I Know I’m in love with you. 🥺",
       "Pretty please? Mike said he’ll be sad if you say no. 🐢💔",
       "You’re my favorite person in the world, Madison. ",
-      "Saying  would make me the happiest person ever though! ",
-      "You wouldn’t want to break Mikes heart, Madison, would you? 😭",
+      "Saying yes would make me the happiest person ever though! ",
+      "You wouldn’t want to break Mike's heart, Madison, would you? 😭",
       "You’re my dream Valentine, Madison. Don’t say no!",
       "Madison, Mike agrees—he’s rooting for us! ",
       "What if I promised to share my food with you on our dates? ",
@@ -170,9 +215,7 @@
 
     let noClickCount = 0;
     let yesScale = 1;
-    let noScale = 1;
-    const scaleIncrement = 0.05;
-    const maxNoClicks = 20;
+    const maxNoClicks = 20; // Stop growing "Yes" after 20 "No" button clicks
 
     noButton.addEventListener("click", () => {
       if (noClickCount < noResponses.length) {
@@ -182,24 +225,40 @@
         message.textContent = "Okay, I get it... 😭 But Mike and I still think you're amazing! ❤️";
       }
 
+      // Grow the "Yes" button
       if (noClickCount <= maxNoClicks) {
-        yesScale += scaleIncrement;
+        yesScale += 0.035;
+        yesButton.style.transform = `scale(${yesScale})`;
       }
-      yesButton.style.transform = `scale(${yesScale})`;
 
-      noScale -= 0.04;
-      noButton.style.transform = `scale(${noScale})`;
+      // Relocate the "No" button randomly
       noButton.style.position = "absolute";
       noButton.style.left = `${Math.random() * 90}vw`;
       noButton.style.top = `${Math.random() * 80}vh`;
-
-      buttonsContainer.style.marginTop = `${50 + (yesScale - 1) * 50}px`;
-      message.style.marginTop = `${20 + (yesScale - 1) * 30}px`;
     });
 
     yesButton.addEventListener("click", () => {
-      message.textContent = "Yay! You made my day, Thank you btw Mike is doing a happy dance! ";
+      message.innerHTML = `
+        Yay! You made my day! 🎉💕 <br>
+        Mike is doing a happy dance! 🐢💃
+      `;
     });
+
+    // Countdown to Valentine's Day
+    const valentineDate = new Date('February 14, 2025').getTime();
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const distance = valentineDate - now;
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      countdownElement.innerHTML = `💌 Only ${days} days, ${hours} hours, ${minutes} minutes, and ${seconds} seconds until Valentine's Day! 💖`;
+    }
+
+    setInterval(updateCountdown, 1000);
   </script>
 </body>
 </html>
