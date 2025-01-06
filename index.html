@@ -87,7 +87,7 @@
   </style>
 </head>
 <body>
-  <h1>Will You Be My Valentine, Madison? ❤️</h1>
+  <h1>1 Will You Be My Valentine, Madison? ❤️</h1>
   <div id="buttons">
     <button id="yes">Yes</button>
     <button id="no">No</button>
@@ -132,14 +132,14 @@
     let noScale = 1;
     const maxYesScale = 2;  // Maximum size for the "Yes" button
     const scaleIncrement = 0.20;  // 5% growth each click
-    const maxNoClicks = 100;  // Stop growing "Yes" after 21 "No" button clicks
+    const maxNoClicks = 20;  // Stop growing "Yes" after 21 "No" button clicks
 
     noButton.addEventListener("click", () => {
       if (noClickCount < noResponses.length) {
         message.textContent = noResponses[noClickCount];
         noClickCount++;
       } else {
-        message.textContent = "Okay, I get it... 😭 But Mike and I still think you're amazing! 🐢❤️";
+        message.textContent = "Okay, I get it... 😭 But Mike and I still think you're amazing! ❤️";
       }
 
       // Grow the "Yes" button by 3.5% (each time "No" is clicked)
@@ -161,7 +161,7 @@
     });
 
     yesButton.addEventListener("click", () => {
-      message.textContent = "Yay! You made my day, Madison! 🎉❤️ Mike is doing a happy dance! 🐢💃";
+      message.textContent = "Yay! You made my day, Thank you btw Mike is doing a happy dance! ";
     });
   </script>
 </body>
