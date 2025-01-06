@@ -13,11 +13,11 @@
       padding: 20px;
       display: flex;
       flex-direction: column;
-      justify-content: flex-start; /* Allow the content to align from the top */
+      justify-content: flex-start;
       align-items: center;
       height: 100vh;
       margin: 0;
-      overflow: hidden; /* Prevents scrollbars */
+      overflow: hidden;
     }
 
     h1 {
@@ -32,7 +32,7 @@
       justify-content: center;
       gap: 20px;
       flex-wrap: wrap;
-      transition: margin-top 0.3s ease; /* Smooth transition when the Yes button grows */
+      transition: margin-top 0.3s ease;
     }
 
     button {
@@ -66,7 +66,7 @@
       color: #800040;
       width: 100%;
       text-align: center;
-      transition: margin-top 0.3s ease; /* Smooth transition for messages */
+      transition: margin-top 0.3s ease;
     }
 
     footer {
@@ -130,7 +130,7 @@
 
     let noClickCount = 0;
     let yesScale = 1.2;
-    let yesButtonMaxSize = 2; // Prevent the button from scaling infinitely
+    let yesButtonMaxSize = 2;
 
     noButton.addEventListener("click", () => {
       if (noClickCount < noResponses.length) {
@@ -140,7 +140,19 @@
         message.textContent = "Okay, I get it... 😭 But Mike and I still think you're amazing! 🐢❤️";
       }
 
-      // Increase size of the "Yes" button, but cap it to max size
+      // Shrink "No" button by 4% each click
+      let newScale = noButton.style.transform ? parseFloat(noButton.style.transform.replace('scale(', '').replace(')', '')) : 1;
+      newScale -= 0.04;
+      noButton.style.transform = `scale(${newScale})`;
+
+      // Relocate the "No" button randomly on the screen
+      const randomX = Math.random() * (window.innerWidth - noButton.offsetWidth);
+      const randomY = Math.random() * (window.innerHeight - noButton.offsetHeight);
+      noButton.style.position = 'absolute';
+      noButton.style.left = `${randomX}px`;
+      noButton.style.top = `${randomY}px`;
+
+      // Increase size of the "Yes" button
       if (yesScale < yesButtonMaxSize) {
         yesScale += 0.2;
       }
