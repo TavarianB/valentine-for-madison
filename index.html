@@ -1,4 +1,4 @@
-!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -112,6 +112,7 @@
     ];
 
     let noClickCount = 0;
+    let yesScale = 1.2;
 
     noButton.addEventListener("click", () => {
       if (noClickCount < noResponses.length) {
@@ -120,10 +121,13 @@
       } else {
         message.textContent = "Okay, I get it... 😭 But Mike and I still think you're amazing! 🐢❤️";
       }
+
+      // Increase size of the "Yes" button
+      yesScale += 0.2;
+      yesButton.style.transform = `scale(${yesScale})`;
     });
 
     yesButton.addEventListener("click", () => {
-      yesButton.style.transform = `scale(${1.2 + noClickCount * 0.2})`;
       message.textContent = "Yay! You made my day, Madison! 🎉❤️ Mike is doing a happy dance! 🐢💃";
     });
   </script>
