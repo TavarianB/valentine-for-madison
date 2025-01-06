@@ -20,14 +20,6 @@
       overflow: hidden;
     }
 
-    #photo img {
-      width: 250px;  /* Adjust to desired width */
-      height: 250px; /* Adjust to desired height */
-      object-fit: cover; /* Ensures the image covers the area of the heart */
-      clip-path: polygon(50% 0%, 100% 30%, 80% 100%, 50% 80%, 20% 100%, 0% 30%); /* Heart shape */
-      border-radius: 50%; /* Optional: Adds smooth edges if needed */
-    }
-    
     h1 {
       font-size: 3rem;
       color: #ff0033;
@@ -162,7 +154,7 @@
   <div class="heart"></div>
   <div class="heart"></div>
 
-  <h1>Will You Be My Valentine, Madison? ❤️</h1>
+  <h1>1 Will You Be My Valentine, Madison? ❤️</h1>
   <p id="poem">
     Roses are red, violets are blue,<br>
     No one shines brighter than you! 🌹💖<br>
@@ -258,7 +250,7 @@
       const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
       const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-      countdownElement.innerHTML = `💖 Only ${days} days, ${hours} hours, ${minutes} minutes, and ${seconds} seconds until Valentine's Day! 💖`;
+      countdownElement.innerHTML = `💌 Only ${days} days, ${hours} hours, ${minutes} minutes, and ${seconds} seconds until Valentine's Day! 💖`;
     }
 
     setInterval(updateCountdown, 1000);
