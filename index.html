@@ -21,23 +21,24 @@
     }
 
     h1 {
-      font-size: 3rem;
+      font-size: 2rem; /* Adjusted for smaller screens */
       color: #ff0033;
       margin-top: 20px;
+      padding: 0 10px; /* Prevent text overflow */
     }
 
     #buttons {
-      margin-top: 50px;
+      margin-top: 30px; /* Reduced spacing for mobile */
       display: flex;
       justify-content: center;
-      gap: 20px;
+      gap: 10px; /* Reduced gap for smaller screens */
       flex-wrap: wrap;
       transition: margin-top 0.3s ease;
     }
 
     button {
-      font-size: 1.5rem;
-      padding: 10px 20px;
+      font-size: 1.2rem; /* Smaller text size */
+      padding: 10px 15px; /* Adjusted for smaller screens */
       margin: 10px;
       border: none;
       border-radius: 10px;
@@ -61,17 +62,18 @@
     }
 
     #message {
-      font-size: 1.2rem;
-      margin-top: 20px;
+      font-size: 1rem; /* Reduced size for better readability */
+      margin-top: 15px; /* Adjusted spacing */
       color: #800040;
       width: 100%;
       text-align: center;
+      padding: 0 10px; /* Prevent text overflow */
       transition: margin-top 0.3s ease;
     }
 
     footer {
-      margin-top: 50px;
-      font-size: 1rem;
+      margin-top: 20px; /* Reduced spacing for mobile */
+      font-size: 0.9rem; /* Smaller footer text */
       color: #800040;
     }
 
@@ -83,6 +85,46 @@
 
     footer a:hover {
       text-decoration: underline;
+    }
+
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 1.8rem;
+      }
+
+      button {
+        font-size: 1rem;
+        padding: 8px 12px;
+      }
+
+      #buttons {
+        gap: 8px;
+        margin-top: 20px;
+      }
+
+      footer {
+        font-size: 0.8rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      h1 {
+        font-size: 1.5rem;
+      }
+
+      button {
+        font-size: 0.9rem;
+        padding: 6px 10px;
+      }
+
+      #buttons {
+        gap: 6px;
+        margin-top: 15px;
+      }
+
+      footer {
+        font-size: 0.7rem;
+      }
     }
   </style>
 </head>
@@ -104,7 +146,6 @@
     const message = document.getElementById("message");
     const buttonsContainer = document.getElementById("buttons");
 
-    // Personalized "No" responses
     const noResponses = [
       "Are you sure, Madison? My heart can’t handle a no. 🥺❤️",
       "But Madison, I really, really Love you! 🥰",
@@ -128,10 +169,10 @@
     ];
 
     let noClickCount = 0;
-    let yesScale = 1;  // Start at original size
-    let noScale = 1;  // Start at original size
-    const scaleIncrement = 0.15;  // Smaller growth increment
-    const maxNoClicks = 20;  // Stop growing after 20 clicks
+    let yesScale = 1;
+    let noScale = 1;
+    const scaleIncrement = 0.05;
+    const maxNoClicks = 20;
 
     noButton.addEventListener("click", () => {
       if (noClickCount < noResponses.length) {
@@ -141,22 +182,19 @@
         message.textContent = "Okay, I get it... 😭 But Mike and I still think you're amazing! ❤️";
       }
 
-      // Grow the "Yes" button by 5% (each time "No" is clicked)
       if (noClickCount <= maxNoClicks) {
         yesScale += scaleIncrement;
       }
       yesButton.style.transform = `scale(${yesScale})`;
 
-      // Shrink the "No" button by 4% and relocate it randomly
       noScale -= 0.04;
       noButton.style.transform = `scale(${noScale})`;
       noButton.style.position = "absolute";
       noButton.style.left = `${Math.random() * 90}vw`;
       noButton.style.top = `${Math.random() * 80}vh`;
 
-      // Adjust other elements' positioning dynamically
-      buttonsContainer.style.marginTop = `${50 + (yesScale - 1) * 100}px`;  // Spacing between buttons
-      message.style.marginTop = `${20 + (yesScale - 1) * 60}px`;  // Adjust message spacing
+      buttonsContainer.style.marginTop = `${50 + (yesScale - 1) * 50}px`;
+      message.style.marginTop = `${20 + (yesScale - 1) * 30}px`;
     });
 
     yesButton.addEventListener("click", () => {
