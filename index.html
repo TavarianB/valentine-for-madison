@@ -129,8 +129,9 @@
     ];
 
     let noClickCount = 0;
-    let yesScale = 1.2;
-    let yesButtonMaxSize = 2;
+    let yesScale = 1;
+    const maxYesScale = 2;  // Maximum size for the "Yes" button
+    const scaleIncrement = 0.035;  // 3.5% growth each click
 
     noButton.addEventListener("click", () => {
       if (noClickCount < noResponses.length) {
@@ -140,27 +141,15 @@
         message.textContent = "Okay, I get it... 😭 But Mike and I still think you're amazing! 🐢❤️";
       }
 
-      // Shrink "No" button by 4% each click
-      let newScale = noButton.style.transform ? parseFloat(noButton.style.transform.replace('scale(', '').replace(')', '')) : 1;
-      newScale -= 0.04;
-      noButton.style.transform = `scale(${newScale})`;
-
-      // Relocate the "No" button randomly on the screen
-      const randomX = Math.random() * (window.innerWidth - noButton.offsetWidth);
-      const randomY = Math.random() * (window.innerHeight - noButton.offsetHeight);
-      noButton.style.position = 'absolute';
-      noButton.style.left = `${randomX}px`;
-      noButton.style.top = `${randomY}px`;
-
-      // Increase size of the "Yes" button
-      if (yesScale < yesButtonMaxSize) {
-        yesScale += 0.2;
+      // Grow the "Yes" button by 3.5% (each time "No" is clicked)
+      if (yesScale < maxYesScale) {
+        yesScale += scaleIncrement;
       }
       yesButton.style.transform = `scale(${yesScale})`;
 
-      // Move the buttons down if the "Yes" button grows too large
-      buttonsContainer.style.marginTop = `${50 + (yesScale - 1) * 100}px`;
-      message.style.marginTop = `${20 + (yesScale - 1) * 60}px`;
+      // Adjust other elements' positioning dynamically
+      buttonsContainer.style.marginTop = `${50 + (yesScale - 1) * 100}px`;  // Spacing between buttons
+      message.style.marginTop = `${20 + (yesScale - 1) * 60}px`;  // Adjust message spacing
     });
 
     yesButton.addEventListener("click", () => {
