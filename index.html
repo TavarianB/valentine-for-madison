@@ -19,7 +19,15 @@
       margin: 0;
       overflow: hidden;
     }
-
+    
+    #photo img {
+      width: 250px;  /* Adjust to desired width */
+      height: 250px; /* Adjust to desired height */
+      object-fit: cover; /* Ensures the image covers the area of the heart */
+      clip-path: polygon(50% 0%, 100% 30%, 80% 100%, 50% 80%, 20% 100%, 0% 30%); /* Heart shape */
+      border-radius: 50%; /* Optional: Adds smooth edges if needed */
+    }
+    
     h1 {
       font-size: 3rem;
       color: #ff0033;
