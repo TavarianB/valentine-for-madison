@@ -11,6 +11,12 @@
       background-color: #ffe6e6;
       color: #ff3366;
       padding: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
     }
 
     h1 {
@@ -34,6 +40,7 @@
       border-radius: 10px;
       cursor: pointer;
       transition: transform 0.3s ease, background-color 0.3s ease;
+      flex-shrink: 0; /* Prevent buttons from shrinking when the "Yes" button grows */
     }
 
     button#yes {
@@ -54,6 +61,8 @@
       font-size: 1.2rem;
       margin-top: 20px;
       color: #800040;
+      width: 100%;
+      text-align: center;
     }
 
     footer {
