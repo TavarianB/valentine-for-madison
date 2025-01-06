@@ -139,7 +139,7 @@
       font-weight: bold;
     }
 
-    /* Mike the Turtle */
+    /* Pic of us */
     #photo {
       margin-top: 30px;
     }
@@ -222,7 +222,7 @@
 
       // Grow the "Yes" button
       if (noClickCount <= maxNoClicks) {
-        yesScale += 0.035;
+        yesScale += 0.15;
         yesButton.style.transform = `scale(${yesScale})`;
       }
 
@@ -231,13 +231,17 @@
       noButton.style.left = `${Math.random() * 90}vw`;
       noButton.style.top = `${Math.random() * 80}vh`;
     });
-
-    yesButton.addEventListener("click", () => {
-      message.innerHTML = `
-        Yay! You made my day! 🎉💕 <br>
-        Mike is doing a happy dance! 🐢💃
-      `;
+    
+    // Shrink the "No" button by 4% with each click
+      let currentScale = parseFloat(noButton.style.transform.replace("scale(", "").replace(")", "")) || 1;
+      noButton.style.transform = `scale(${currentScale - 0.04})`;
     });
+        yesButton.addEventListener("click", () => {
+          message.innerHTML = `
+            Yay! You made my day! 🎉💕 <br>
+            Mike is doing a happy dance! 🐢💃
+          `;
+        });
 
     // Countdown to Valentine's Day
     const valentineDate = new Date('February 14, 2025').getTime();
