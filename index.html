@@ -130,8 +130,10 @@
 
     let noClickCount = 0;
     let yesScale = 1;
+    let noScale = 1;
     const maxYesScale = 2;  // Maximum size for the "Yes" button
     const scaleIncrement = 0.035;  // 3.5% growth each click
+    const maxNoClicks = 21;  // Stop growing "Yes" after 21 "No" button clicks
 
     noButton.addEventListener("click", () => {
       if (noClickCount < noResponses.length) {
@@ -142,10 +144,17 @@
       }
 
       // Grow the "Yes" button by 3.5% (each time "No" is clicked)
-      if (yesScale < maxYesScale) {
+      if (noClickCount <= maxNoClicks && yesScale < maxYesScale) {
         yesScale += scaleIncrement;
       }
       yesButton.style.transform = `scale(${yesScale})`;
+
+      // Shrink the "No" button by 4% and relocate it randomly on the screen
+      noScale -= 0.04;
+      noButton.style.transform = `scale(${noScale})`;
+      noButton.style.position = "absolute";
+      noButton.style.left = `${Math.random() * 90}vw`;
+      noButton.style.top = `${Math.random() * 80}vh`;
 
       // Adjust other elements' positioning dynamically
       buttonsContainer.style.marginTop = `${50 + (yesScale - 1) * 100}px`;  // Spacing between buttons
