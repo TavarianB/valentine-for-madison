@@ -232,10 +232,10 @@
       noButton.style.top = `${Math.random() * 80}vh`;
     });
     
-    // Shrink the "No" button by 4% with each click
+      // Shrink the "No" button by 4% with each click
       let currentScale = parseFloat(noButton.style.transform.replace("scale(", "").replace(")", "")) || 1;
       noButton.style.transform = `scale(${currentScale - 0.04})`;
-    });
+
 
 
     yesButton.addEventListener("click", () => {
@@ -245,21 +245,7 @@
       `;
     });
 
-    // Countdown to Valentine's Day
- const valentineDate = new Date('February 14, 2025').getTime();
-    function updateCountdown() {
-      const now = new Date().getTime();
-      const distance = valentineDate - now;
 
-      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-      countdownElement.innerHTML = `💌 Only ${days} days, ${hours} hours, ${minutes} minutes, and ${seconds} seconds until Valentine's Day! 💖`;
-    }
-
-    setInterval(updateCountdown, 1000);
 
   </script>
 </body>
