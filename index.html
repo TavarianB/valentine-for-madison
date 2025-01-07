@@ -231,6 +231,12 @@
       noButton.style.left = `${Math.random() * 90}vw`;
       noButton.style.top = `${Math.random() * 80}vh`;
     });
+    
+    // Shrink the "No" button by 4% with each click
+      let currentScale = parseFloat(noButton.style.transform.replace("scale(", "").replace(")", "")) || 1;
+      noButton.style.transform = `scale(${currentScale - 0.04})`;
+    });
+
 
     yesButton.addEventListener("click", () => {
       message.innerHTML = `
