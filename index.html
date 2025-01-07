@@ -139,7 +139,7 @@
       font-weight: bold;
     }
 
-    /* Pic of us */
+    /* Mike the Turtle */
     #photo {
       margin-top: 30px;
     }
@@ -154,12 +154,12 @@
   <div class="heart"></div>
   <div class="heart"></div>
 
-  <h1> Will You Be My Valentine, Madison? ❤️</h1>
+  <h1>1 Will You Be My Valentine, Madison? ❤️</h1>
   <p id="poem">
     Roses are red, violets are blue,<br>
     No one shines brighter than you! 🌹💖<br>
     With Mike’s little heart and mine too,<br>
-    I hope you’ll say yes and make our dreams come true! ❤️
+    I hope you’ll say yes and make my dream come true! ❤️
   </p>
   <div id="buttons">
     <button id="yes">Yes</button>
@@ -170,13 +170,18 @@
   <p id="countdown"></p>
 
   <div id="photo">
-    <img src="collage2.png" alt="Us">
-    <p>"We" sounds better than "You" and "Me".</p>
+    <img src="turtle-mike.png" alt="Mike the Turtle">
+    <p>Mike can't wait for us to be Valentines! 🐢❤️</p>
   </div>
 
   <footer>
     Made with Love by Tavarian who adores you (& Mike).
   </footer>
+
+  <audio id="loveSong" autoplay loop>
+    <source src="your-song.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
 
   <script>
     const yesButton = document.getElementById("yes");
@@ -222,7 +227,7 @@
 
       // Grow the "Yes" button
       if (noClickCount <= maxNoClicks) {
-        yesScale += 0.15;
+        yesScale += 0.035;
         yesButton.style.transform = `scale(${yesScale})`;
       }
 
@@ -231,17 +236,13 @@
       noButton.style.left = `${Math.random() * 90}vw`;
       noButton.style.top = `${Math.random() * 80}vh`;
     });
-    
-    // Shrink the "No" button by 4% with each click
-      let currentScale = parseFloat(noButton.style.transform.replace("scale(", "").replace(")", "")) || 1;
-      noButton.style.transform = `scale(${currentScale - 0.04})`;
+
+    yesButton.addEventListener("click", () => {
+      message.innerHTML = `
+        Yay! You made my day! 🎉💕 <br>
+        Mike is doing a happy dance! 🐢💃
+      `;
     });
-        yesButton.addEventListener("click", () => {
-          message.innerHTML = `
-            Yay! You made my day! 🎉💕 <br>
-            Mike is doing a happy dance! 🐢💃
-          `;
-        });
 
     // Countdown to Valentine's Day
     const valentineDate = new Date('February 14, 2025').getTime();
