@@ -168,18 +168,22 @@
     let yesScale = 1;
     const maxNoClicks = 20;
 
+    // Function to check if the "No" button overlaps with other elements
     function isOverlapping(el1, el2) {
       const rect1 = el1.getBoundingClientRect();
       const rect2 = el2.getBoundingClientRect();
 
+      const buffer = 10; // Buffer zone around elements to prevent overlap
+
       return !(
-        rect1.right < rect2.left ||
-        rect1.left > rect2.right ||
-        rect1.bottom < rect2.top ||
-        rect1.top > rect2.bottom
+        rect1.right + buffer < rect2.left ||
+        rect1.left - buffer > rect2.right ||
+        rect1.bottom + buffer < rect2.top ||
+        rect1.top - buffer > rect2.bottom
       );
     }
 
+    // Function to move the "No" button without overlap
     function moveNoButton() {
       noButton.style.position = "absolute";
       let newLeft, newTop;
