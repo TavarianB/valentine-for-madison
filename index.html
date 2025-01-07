@@ -228,13 +228,18 @@
 
       // Relocate the "No" button randomly
       noButton.style.position = "absolute";
-      noButton.style.left = `${Math.random() * 90}vw`;
-      noButton.style.top = `${Math.random() * 80}vh`;
+      noButton.style.left = `${Math.random() * 85}vw`;
+      noButton.style.top = `${Math.random() * 75}vh`;
     });
     
       // Shrink the "No" button by 4% with each click
       let currentScale = parseFloat(noButton.style.transform.replace("scale(", "").replace(")", "")) || 1;
-      noButton.style.transform = `scale(${currentScale - 0.04})`;
+      if (currentScale > 0.1) { // Minimum scale threshold
+        noButton.style.transform = `scale(${currentScale - 0.04})`;
+      } else {
+        noButton.style.transform = `scale(0.1)`; // Prevent shrinking to zero
+      }
+    });
 
 
 
