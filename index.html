@@ -233,6 +233,7 @@
     });
     
       // Shrink the "No" button by 4% with each click
+      noButton.addEventListener("click", () => {
       let currentScale = parseFloat(noButton.style.transform.replace("scale(", "").replace(")", "")) || 1;
       if (currentScale > 0.1) { // Minimum scale threshold
         noButton.style.transform = `scale(${currentScale - 0.04})`;
