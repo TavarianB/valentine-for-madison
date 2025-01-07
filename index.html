@@ -182,7 +182,6 @@
     const yesButton = document.getElementById("yes");
     const noButton = document.getElementById("no");
     const message = document.getElementById("message");
-    const buttonsContainer = document.getElementById("buttons");
     const countdownElement = document.getElementById("countdown");
 
     // Personalized "No" responses
@@ -210,7 +209,7 @@
 
     let noClickCount = 0;
     let yesScale = 1;
-    const maxNoClicks = 20; // Stop growing "Yes" after 20 "No" button clicks
+    const maxNoClicks = 20;
 
     noButton.addEventListener("click", () => {
       if (noClickCount < noResponses.length) {
@@ -226,17 +225,19 @@
         yesButton.style.transform = `scale(${yesScale})`;
       }
 
-      // Relocate the "No" button randomly
+      // Shrink the "No" button
+      const currentWidth = parseFloat(window.getComputedStyle(noButton).width);
+      const currentHeight = parseFloat(window.getComputedStyle(noButton).height);
+      if (currentWidth > 50 && currentHeight > 20) {
+        noButton.style.width = `${currentWidth * 0.96}px`;
+        noButton.style.height = `${currentHeight * 0.96}px`;
+      }
+
+      // Relocate the "No" button
       noButton.style.position = "absolute";
       noButton.style.left = `${Math.random() * 90}vw`;
       noButton.style.top = `${Math.random() * 80}vh`;
     });
-    
-    // Shrink the "No" button by 4% with each click
-      let currentScale = parseFloat(noButton.style.transform.replace("scale(", "").replace(")", "")) || 1;
-      noButton.style.transform = `scale(${currentScale - 0.04})`;
-    });
-
 
     yesButton.addEventListener("click", () => {
       message.innerHTML = `
@@ -246,7 +247,24 @@
     });
 
     // Countdown to Valentine's Day
- 
+    const valentineDate = new Date('February 14, 2025').getTime();
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const distance = valentineDate - now;
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      countdownElement.innerHTML = `💌 Only ${days} days, ${hours} hours, ${minutes} minutes, and ${seconds} seconds until Valentine's Day! 💖`;
+    }
+
+    // Initial countdown update
+    updateCountdown();
+
+    // Update countdown every second
+    setInterval(updateCountdown, 1000);
   </script>
 </body>
 </html>
