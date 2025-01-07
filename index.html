@@ -15,9 +15,9 @@
       flex-direction: column;
       justify-content: flex-start;
       align-items: center;
-      height: 100vh;
+      min-height: 100vh; /* Use min-height instead of height for scrollable content */
       margin: 0;
-      overflow: hidden;
+      overflow-x: hidden; /* Only hide horizontal overflow */
     }
 
     h1 {
@@ -57,7 +57,7 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      margin-top: 50px; /* Adjust as needed */
+      margin-top: 50px;
     }
 
     button#yes {
@@ -80,7 +80,7 @@
       color: #800040;
       width: 100%;
       text-align: center;
-      margin-bottom: 20px; /* Add some space between the message and the buttons */
+      margin-bottom: 20px;
       transition: margin-top 0.3s ease;
     }
 
@@ -244,8 +244,8 @@
       noButton.style.top = `${Math.random() * 75}vh`;
     });
     
-      // Shrink the "No" button by 4% with each click
-      noButton.addEventListener("click", () => {
+    // Shrink the "No" button by 4% with each click
+    noButton.addEventListener("click", () => {
       let currentScale = parseFloat(noButton.style.transform.replace("scale(", "").replace(")", "")) || 1;
       if (currentScale > 0.1) { // Minimum scale threshold
         noButton.style.transform = `scale(${currentScale - 0.04})`;
@@ -254,17 +254,12 @@
       }
     });
 
-
-
     yesButton.addEventListener("click", () => {
       message.innerHTML = `
         Yay! You made my day! 🎉💕 <br>
         Mike is doing a happy dance! 🐢💃
       `;
     });
-
-
-
   </script>
 </body>
 </html>
