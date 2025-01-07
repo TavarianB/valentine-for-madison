@@ -15,9 +15,9 @@
       flex-direction: column;
       justify-content: flex-start;
       align-items: center;
-      min-height: 100vh; /* Use min-height instead of height for scrollable content */
+      min-height: 100vh;
       margin: 0;
-      overflow-x: hidden; /* Only hide horizontal overflow */
+      overflow-x: hidden;
     }
 
     h1 {
@@ -100,46 +100,6 @@
       text-decoration: underline;
     }
 
-    /* Falling Hearts Animation */
-    @keyframes fall {
-      0% {
-        transform: translateY(-100px) rotate(0deg);
-        opacity: 1;
-      }
-      100% {
-        transform: translateY(100vh) rotate(360deg);
-        opacity: 0;
-      }
-    }
-
-    .heart {
-      position: absolute;
-      width: 20px;
-      height: 20px;
-      background-color: #ff3366;
-      clip-path: polygon(50% 0%, 100% 37%, 82% 100%, 50% 82%, 18% 100%, 0% 37%);
-      animation: fall 5s linear infinite;
-    }
-
-    .heart:nth-child(1) {
-      left: 20%;
-      animation-duration: 4s;
-      animation-delay: 0s;
-    }
-
-    .heart:nth-child(2) {
-      left: 50%;
-      animation-duration: 5s;
-      animation-delay: 1s;
-    }
-
-    .heart:nth-child(3) {
-      left: 80%;
-      animation-duration: 3s;
-      animation-delay: 2s;
-    }
-
-    /* Countdown Timer */
     #countdown {
       font-size: 1rem;
       color: #800040;
@@ -147,7 +107,6 @@
       font-weight: bold;
     }
 
-    /* Pic of us */
     #photo {
       margin-top: 30px;
     }
@@ -158,10 +117,6 @@
   </style>
 </head>
 <body>
-  <div class="heart"></div>
-  <div class="heart"></div>
-  <div class="heart"></div>
-
   <h1>❤️ Will You Be My Valentine, Madison? ❤️</h1>
   <div id="buttons-container">
     <p id="message"></p>
@@ -171,7 +126,6 @@
     </div>
   </div>
   
-
   <p id="countdown"></p>
   
   <p id="poem">
@@ -197,7 +151,6 @@
     const buttonsContainer = document.getElementById("buttons");
     const countdownElement = document.getElementById("countdown");
 
-    // Personalized "No" responses
     const noResponses = [
       "Are you sure, Madison? My heart can’t handle a no. 🥺❤️",
       "But Madison, I really, really Love you! 🥰",
@@ -208,21 +161,41 @@
       "You’re my favorite person in the world, Madison. ",
       "Saying yes would make me the happiest person ever though! ",
       "You wouldn’t want to break Mike's heart, Madison, would you? 😭",
-      "You’re my dream Valentine, Madison. Don’t say no!",
-      "Madison, Mike agrees—he’s rooting for us! ",
-      "What if I promised to share my food with you on our dates? ",
-      "I made this whole website just for you, Madison. ",
-      "You’re the only person I want as my Valentine FOREVER, Madison. 💕",
-      "Mike says he can’t believe you’re hesitating! ",
-      "Madison, you’re the peanut butter to my jelly! lol ",
-      "You’re the missing piece of my puzzle, Madison. 🧩",
-      "No? But I’ve already written our love story in my head, Madison. 📖❤️",
-      "You’re my sunshine on a cloudy day, Madison. 🌞☁️ Don’t say no!"
+      "You’re my dream Valentine, Madison. Don’t say no!"
     ];
 
     let noClickCount = 0;
     let yesScale = 1;
-    const maxNoClicks = 20; // Stop growing "Yes" after 20 "No" button clicks
+    const maxNoClicks = 20;
+
+    function isOverlapping(el1, el2) {
+      const rect1 = el1.getBoundingClientRect();
+      const rect2 = el2.getBoundingClientRect();
+
+      return !(
+        rect1.right < rect2.left ||
+        rect1.left > rect2.right ||
+        rect1.bottom < rect2.top ||
+        rect1.top > rect2.bottom
+      );
+    }
+
+    function moveNoButton() {
+      noButton.style.position = "absolute";
+      let newLeft, newTop;
+
+      do {
+        newLeft = Math.random() * 85;
+        newTop = Math.random() * 75;
+        noButton.style.left = `${newLeft}vw`;
+        noButton.style.top = `${newTop}vh`;
+      } while (
+        isOverlapping(noButton, yesButton) ||
+        isOverlapping(noButton, message) ||
+        isOverlapping(noButton, countdownElement) ||
+        isOverlapping(noButton, buttonsContainer)
+      );
+    }
 
     noButton.addEventListener("click", () => {
       if (noClickCount < noResponses.length) {
@@ -232,26 +205,12 @@
         message.textContent = "Okay, I get it... 😭 But Mike and I still think you're amazing! ❤️";
       }
 
-      // Grow the "Yes" button
       if (noClickCount <= maxNoClicks) {
         yesScale += 0.15;
         yesButton.style.transform = `scale(${yesScale})`;
       }
 
-      // Relocate the "No" button randomly
-      noButton.style.position = "absolute";
-      noButton.style.left = `${Math.random() * 85}vw`;
-      noButton.style.top = `${Math.random() * 75}vh`;
-    });
-    
-    // Shrink the "No" button by 4% with each click
-    noButton.addEventListener("click", () => {
-      let currentScale = parseFloat(noButton.style.transform.replace("scale(", "").replace(")", "")) || 1;
-      if (currentScale > 0.1) { // Minimum scale threshold
-        noButton.style.transform = `scale(${currentScale - 0.04})`;
-      } else {
-        noButton.style.transform = `scale(0.1)`; // Prevent shrinking to zero
-      }
+      moveNoButton();
     });
 
     yesButton.addEventListener("click", () => {
