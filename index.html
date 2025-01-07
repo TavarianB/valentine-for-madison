@@ -61,6 +61,13 @@
     button#no {
       background-color: #f2f2f2;
       color: #ff3366;
+      text-align: center; /* Ensure the text is centered */
+      display: flex; /* Flexbox for centering */
+      justify-content: center; /* Horizontally center the text */
+      align-items: center; /* Vertically center the text */
+      transform-origin: center; /* Ensure scaling happens around the center */
+      font-size: 1.5rem; /* Initial font size */
+      transition: transform 0.3s ease, font-size 0.3s ease; /* Smooth shrinking */
     }
 
     button:hover {
@@ -226,11 +233,10 @@
       }
 
       // Shrink the "No" button
-      const currentWidth = parseFloat(window.getComputedStyle(noButton).width);
-      const currentHeight = parseFloat(window.getComputedStyle(noButton).height);
-      if (currentWidth > 50 && currentHeight > 20) {
-        noButton.style.width = `${currentWidth * 0.96}px`;
-        noButton.style.height = `${currentHeight * 0.96}px`;
+      let currentScale = parseFloat(noButton.style.transform.replace("scale(", "").replace(")", "")) || 1;
+      const newScale = currentScale - 0.04;
+      noButton.style.transform = `scale(${newScale})`;
+      noButton.style.fontSize = `${1.5 * newScale}rem`; // Scale the font proportionally
       }
 
       // Relocate the "No" button
